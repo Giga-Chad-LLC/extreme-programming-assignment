@@ -3,6 +3,7 @@ import {CustomJwtPayload, JwtPayloadData, Tokens} from "../types";
 import jwt from "jsonwebtoken";
 import {JWT_SECRET} from "../../env";
 import {RefreshToken, User} from "@prisma/client";
+import Cookies from "cookies";
 
 
 
@@ -67,22 +68,22 @@ export class TokenService {
    static validateRefreshToken = (token: string) => {
       try {
          const REFRESH_SECRET = JWT_SECRET;
-         return jwt.verify(token, REFRESH_SECRET);
+         return jwt.verify(token, REFRESH_SECRET) as CustomJwtPayload;
       }
       catch {
          return null;
       }
    };
 
-   /*static setRefreshTokenInHttpOnlyCookies = (req, res, refreshToken) => {
-      // setting refresh token in http-only cookies
-      const cookies = new Cookies(req, res);
-      cookies.set('refreshToken', refreshToken, {
-         httpOnly: true,
-         // secure: true, // this option is used with HTTPS protocol
-         maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
-      });
-   };*/
+   // async setRefreshTokenInHttpOnlyCookies(req: Request, res: Response, refreshToken: string) {
+   //    // setting refresh token in http-only cookies
+   //    const cookies = new Cookies(req, res);
+   //    cookies.set('refreshToken', refreshToken, {
+   //       httpOnly: true,
+   //       // secure: true, // this option is used with HTTPS protocol
+   //       maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+   //    });
+   // };
 
    // returns payload for tokens
    createTokenPayload(user: User): JwtPayloadData {

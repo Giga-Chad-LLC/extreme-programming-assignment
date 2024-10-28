@@ -81,13 +81,65 @@ router.post('/register', async (req, res) => {
    }
 });
 
+router.post('/refresh', async (req, res) => {
+   try {
+      if (Array.isArray(req.headers['x-refresh-token'])) {
+         res.status(403).json({message: 'Only one refresh token is allowed'});
+         return;
+      }
+
+      const refreshToken = req.headers['x-refresh-token'];
+
+      // const response = await refresh(refreshToken);
+      if(!refreshToken) {
+         res.status(403).json({message: 'Refresh token is required'});
+         return;
+      }
+
+      const tokenPayload = TokenService.validateRefreshToken(refreshToken);
+
+      if (!tokenPayload) {
+         res.status(403).json({message: 'No token payload for refresh token'});
+         return;
+      }
+
+      const tokenDataFromDb = await refreshTokenRepository.get(tokenPayload.userId, refreshToken);
+
+      // if token is invalid or does not exist in db
+      if(!tokenDataFromDb) {
+         res.status(403).json({message: 'Refresh token not found in db'});
+         return;
+      }
+
+      // retrieving user from db
+      const user = await userRepository.getById(tokenPayload.userId);
+
+      // if user does not exist in db
+      if(!user) {
+         res.status(403).json({message: `No user for id ${tokenPayload.userId} found`});
+         return;
+      }
+
+      // creating tokens payload
+      const newTokens = await generateAndSaveTokens(user);
+
+      res.json({
+         ...newTokens,
+         user,
+      });
+   }
+   catch(error) {
+      console.error(error);
+      res.status(500).json({error: `Failed to register: ${error}`});
+   }
+});
+
 
 async function generateAndSaveTokens(user: User): Promise<Tokens> {
    // generate JWT token
    const payload = service.createTokenPayload(user);
    const { accessToken, refreshToken } = await service.generateTokens(payload);
    await service.saveRefreshToken(user.id, refreshToken);
-
    return { accessToken, refreshToken };
 }
 
