@@ -1,15 +1,9 @@
 import { Item, Status } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
+import { IRepository } from "./IRepository";
 
 
-export interface ItemRepository {
-  getAll(listId: number): Promise<Item[]>
-  create(listId: number, title: string, description: string): Promise<Item>
-  delete(itemId: number): Promise<Item | null>
-  update(itemId: number, title?: string, description?: string, status?: string): Promise<Item | null>
-};
-
-export class ItemDBRepository implements ItemRepository {
+export class ItemRepository implements IRepository<Item> {
   constructor(private readonly prisma: PrismaClient) {}
 
   async getAll(listId: number): Promise<Item[]> {

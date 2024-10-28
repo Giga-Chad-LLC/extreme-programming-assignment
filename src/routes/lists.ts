@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
-import { ListRepository } from '../db/repositories/ListRepository';
 import { checkPresent } from '../utils';
-
+import { ListRepository } from '../db/repositories/ListRepository';
 
 
 // TODO: add auth middleware in each route
