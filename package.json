@@ -9,7 +9,7 @@
     "prisma:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
     "build": "tsc --build",
     "start": "bun run src/server.js",
-    "test": "vitest"
+    "test": "bun test"
   },
   "devDependencies": {
     "@types/bun": "latest"
