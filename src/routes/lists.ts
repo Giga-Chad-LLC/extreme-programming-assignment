@@ -10,12 +10,12 @@ import { checkPresent } from '../utils';
 export const createListRouter = (listRepository: ListRepository) => {
   const router = Router();
   
-  router.get('/:userId', async (req, res) => {
+  router.get('/', async (req, res) => {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      if (!checkPresent(userId, res, 'User id is required')) return;
-    
-      const lists = await listRepository.getAll(userId);
+      const userId = req.query.userId
+      if (!checkPresent(req.query.userId, res, 'User id is required')) return;
+
+      const lists = await listRepository.getAll(Number(userId));
 
       res.status(200).json(lists);
     } catch (error) {
@@ -25,12 +25,12 @@ export const createListRouter = (listRepository: ListRepository) => {
 
   router.post('/', async (req, res) => {
     try {
-      const { userId, listName } = req.body;
+      const { userId, name } = req.body;
       
       if (!checkPresent(userId, res, 'User id is required')) return;
-      if (!checkPresent(listName, res, 'List name is required')) return;
+      if (!checkPresent(name, res, 'List name is required')) return;
 
-      const newList = await listRepository.create(userId, listName);
+      const newList = await listRepository.create(userId, name);
 
       res.status(200).json(newList);
     }
@@ -60,13 +60,13 @@ export const createListRouter = (listRepository: ListRepository) => {
 
   router.put('/', async (req, res) => {
     try {
-      const { userId, listId, newName } = req.body;
+      const { userId, listId, name } = req.body;
 
       if (!checkPresent(userId, res, 'User id is required')) return;
       if (!checkPresent(listId, res, 'List id is required')) return;
-      if (!checkPresent(newName, res, 'List name is required')) return;
+      if (!checkPresent(name, res, 'List name is required')) return;
 
-      const updatedList = await listRepository.update(userId, listId, newName);
+      const updatedList = await listRepository.update(userId, listId, name);
       if (!updatedList) {
         res.status(404).json({ error: 'List not found' });
         return;
