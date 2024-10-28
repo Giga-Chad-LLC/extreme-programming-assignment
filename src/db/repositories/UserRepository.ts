@@ -1,26 +1,37 @@
 import type {User} from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
+import {IRepository} from "./IRepository";
 
 
-export class UserRepository {
+export class UserRepository implements IRepository<User> {
    constructor(private readonly prisma: PrismaClient) {}
 
-   async create(email: string): Promise<User> {
-      const user = await this.prisma.user.create({
+   async create(email: string, password: string): Promise<User> {
+      return this.prisma.user.create({
          data: {
-            email: email,
-            name: "John Doe",
+            email,
+            password,
          },
       });
-      console.log("User created:", user);
+   }
 
-      return user;
+   async getById(userId: number): Promise<User | null> {
+      return this.prisma.user.findUnique({
+         where: {
+            id: userId,
+         },
+      });
+   }
+
+   async getByEmail(email: string): Promise<User | null> {
+      return this.prisma.user.findUnique({
+         where: {
+            email: email,
+         },
+      });
    }
 
    async getAll(): Promise<User[]> {
-      const users = await this.prisma.user.findMany();
-      console.log("Users:", users);
-
-      return users;
+      return this.prisma.user.findMany();
    }
 }
