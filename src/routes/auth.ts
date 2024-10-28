@@ -39,7 +39,11 @@ router.post('/login', async (req, res) => {
       res.status(200).json({
          accessToken,
          refreshToken,
-         user,
+         user: {
+            id: user.id,
+            email: user.email,
+            createdAt: user.createdAt,
+         },
       });
    }
    catch (error) {
@@ -72,7 +76,11 @@ router.post('/register', async (req, res) => {
       res.status(200).json({
          accessToken,
          refreshToken,
-         user,
+         user: {
+            id: user.id,
+            email: user.email,
+            createdAt: user.createdAt,
+         },
       });
    }
    catch (error) {
@@ -80,6 +88,8 @@ router.post('/register', async (req, res) => {
       res.status(500).json({error: `Failed to register: ${error}`});
    }
 });
+
+
 
 router.post('/refresh', async (req, res) => {
    try {
@@ -125,7 +135,11 @@ router.post('/refresh', async (req, res) => {
 
       res.json({
          ...newTokens,
-         user,
+         user: {
+            id: user.id,
+            email: user.email,
+            createdAt: user.createdAt,
+         },
       });
    }
    catch(error) {
