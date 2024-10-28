@@ -47,4 +47,5 @@ jobs:
       - name: Run tests
         run: bun run test
         env:
+          JWT_SECRET: my-test-secret
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
