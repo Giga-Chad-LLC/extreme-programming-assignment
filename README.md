@@ -1,4 +1,54 @@
-# Fullstack Project Template
+# Extreme Programming Assignment
+
+Google Doc с артифактами [здесь](https://docs.google.com/document/d/1-J4p9cNFFJu1YI8H9T9lPxSzkSzGLL0J5ii4fPLM0eg/edit?usp=sharing).
+
+# Описание проекта
+
+## Требования:
+1. Web-приложение по редактированию списков задач
+2. У пользователей есть аккаунты, редактирование списков невозможно без регистрации
+2. Каждый список имеет наименование и очередность в порядке добавления в общем наборе списков пользователя
+3. В списках хранятся карточки в порядке добавления
+4. Каждую карточку можно редактировать. Она содержит поля:
+    - Название
+    - Описание
+    - Статус
+5. У каждого пользователя может быть не более 3 активный авторизированных устройств (авторизированных сессий).   
+
+## Сценарии:
+1. Пользователь сделал регистрацию -> попал в личный кабинет.
+3. Пользователь сделал вход в свой аккаунт -> попал в личный кабинет.
+5. Пользователь создает новый список -> на UI отображается новый созданный список.
+6. Пользователь создает новый элемент списка -> на UI отображается новый элемент списка.
+
+## Endpoints:
+1. Auth:
+	1. Registration (`auth/register`): creates a new user and access/refresh tokens.
+	2. Authorization (`auth/login`): checks the validity of tokens.
+	3. Refresh tokens (`auth/refresh`): updates access and refresh tokens.
+
+2. User (protected):
+	1. Get user data (email, username) by ID
+
+3. List (protected):
+	1. Get all lists and tasks in them by user ID
+	2. Create a new list for a user
+	3. Update list's data for a user
+	4. Delete a list for a user
+
+4. Task:
+	1. Create/update/delete a task in a list by user and list id
+
+## План работ
+
+Версия 1 (1.5h):
+* [x] Endpoint'ы для регистрации, авторизации, и  обновления токенов (Владислав).
+* [x] Endpoint'ы для CRUD'а списков (Дмитрий).
+
+Версия 2 (final):
+* [x] Тесты для написанных endpoint'ов регистрации, авторизации (Владислав).
+* [x] Тесты для написанных endpoint'ов списков (Дмитрий).
+* [x] Endpoint'ы для получения задач в списках (Дмитрий).
 
 ## Development
 
