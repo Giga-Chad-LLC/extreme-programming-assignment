@@ -2,8 +2,15 @@ import type {List} from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 
 
-export class ListRepository {
-   constructor(private readonly prisma: PrismaClient) {}
+export interface ListRepository {
+  getAll(userId: number): Promise<List[]>
+  create(userId: number, name: string): Promise<List>
+  delete(userId: number, listId: number): Promise<List | null>
+  update(userId: number, listId: number, newName: string): Promise<List | null>
+};
+
+export class ListDBRepository implements ListRepository {
+  constructor(private readonly prisma: PrismaClient) {}
 
   async getAll(userId: number): Promise<List[]> {
     return this.prisma.list.findMany({
