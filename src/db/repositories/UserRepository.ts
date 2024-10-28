@@ -1,6 +1,5 @@
 import type {User} from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
-import {aw} from "vitest/dist/chunks/reporters.C4ZHgdxQ";
 import {IRepository} from "./IRepository";
 
 
