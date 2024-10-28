@@ -50,7 +50,17 @@ Google Doc с артифактами [здесь](https://docs.google.com/docume
 * [x] Тесты для написанных endpoint'ов списков (Дмитрий).
 * [x] Endpoint'ы для получения задач в списках (Дмитрий).
 
-## Development
+
+## Тестирование:
+
+1. CI с тестами в папке `tests/*.test.ts`.
+
+2. Ручное через Postman:
+    1. Тестирование для Auth-роутов:
+    ![image](https://github.com/user-attachments/assets/524a6510-dd36-4188-b3b4-164070618c25)
+
+
+# Development
 
 Follow the steps below:
 
