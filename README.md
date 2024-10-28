@@ -58,6 +58,17 @@ Google Doc с артифактами [здесь](https://docs.google.com/docume
 2. Ручное через Postman:
     1. Тестирование для Auth-роутов:
     ![image](https://github.com/user-attachments/assets/524a6510-dd36-4188-b3b4-164070618c25)
+    2. Тестирование для листов и задач:
+    ![1](https://github.com/user-attachments/assets/da473230-8ae3-43bc-b053-fb820853967e)
+    ![2](https://github.com/user-attachments/assets/0a21d3fd-d8d7-4f73-ac8f-efa2bb143702)
+    ![3](https://github.com/user-attachments/assets/9736be1d-5908-40e7-99b5-a65ccb50c09e)
+    ![4](https://github.com/user-attachments/assets/65ffcc06-ae45-4a80-a36d-748bd221298c)
+    ![5](https://github.com/user-attachments/assets/765ce4f5-19d0-4179-9084-0c433d5ce74f)
+    ![6](https://github.com/user-attachments/assets/4168005b-eccc-43a1-8537-358402af52b4)
+    ![7](https://github.com/user-attachments/assets/debe233a-5005-4a71-92e7-667667d14151)
+    ![8](https://github.com/user-attachments/assets/d25fb9ac-8c28-43f7-b850-1d62faf4ba71)
+
+   
 
 
 # Development
