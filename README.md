@@ -88,6 +88,7 @@ cd ./client && bun install
 1. Create a `.env` file in the root directory with the following content:
 ```bash
 PORT=3000
+JWT_SECRET=my-secret-123
 DATABASE_URL="postgresql://postgres:password@localhost:5432/db-name?schema=public"
 # e.g., "postgresql://root:123@127.0.0.1:5432/my-project-template?schema=public"
 ```
