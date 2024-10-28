@@ -11,7 +11,7 @@ export class UserRepository implements IRepository<User> {
          data: {
             email,
             password,
-         },
+         }
       });
    }
 
@@ -19,7 +19,7 @@ export class UserRepository implements IRepository<User> {
       return this.prisma.user.findUnique({
          where: {
             id: userId,
-         },
+         }
       });
    }
 
@@ -28,6 +28,12 @@ export class UserRepository implements IRepository<User> {
          where: {
             email: email,
          },
+         select: {
+            id: true,
+            email: true,
+            createdAt: true,
+            password: true,
+         }
       });
    }
 
