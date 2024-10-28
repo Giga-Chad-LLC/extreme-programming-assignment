@@ -12,6 +12,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,27 +39,10 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Set up PostgreSQL
-        run: echo "Setting up PostgreSQL"
-        services:
-          postgres:
-            image: postgres:latest
-            env:
-              POSTGRES_USER: postgres
-              POSTGRES_PASSWORD: postgres
-              POSTGRES_DB: testdb
-            ports:
-              - 5432:5432
-            options: >-
-              --health-cmd="pg_isready -U postgres"
-              --health-interval=10s
-              --health-timeout=5s
-              --health-retries=5
+      - name: Run migrations
+        run: bun run prisma:deploy && bun run prisma:generate
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/testdb
-
-      - name: Run migrations
-        run: bun run prisma:deploy
 
       - name: Run tests
         run: bun run test
