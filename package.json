@@ -1,0 +1,31 @@
+{
+  "name": "fullstack-project-template",
+  "module": "src/server.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/server.ts",
+    "prisma:generate": "prisma generate --schema=./prisma/schema.prisma",
+    "prisma:deploy": "prisma migrate deploy --schema=./prisma/schema.prisma",
+    "build": "tsc --build",
+    "start": "bun run src/server.js",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.21.1",
+    "@types/express": "^5.0.0",
+    "@types/supertest": "^6.0.2",
+    "dotenv": "^16.4.5",
+    "env-var": "^7.5.0",
+    "eslint": "^9.13.0",
+    "express": "^4.21.1",
+    "prisma": "^5.21.1",
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.3"
+  }
+}
